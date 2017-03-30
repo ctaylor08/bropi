@@ -44,3 +44,9 @@ sed -i '/exit 0/i iptables-restore < /etc/iptables.ipv4.nat' /etc/rc.local
 service hostapd start
 service dnsmasq start
 
+echo ""
+echo "Completed WAP setup"
+echo "+ SSID: bropi-ap"
+echo "+ PW: bropi-ap"
+echo ""
+echo "run 'sudo reboot' to enable"
