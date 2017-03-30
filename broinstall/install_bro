@@ -22,13 +22,16 @@ curl -o $DWNLDDIR/bro-2.5.tar.gz  https://www.bro.org/downloads/bro-2.5.tar.gz
 # Unpack the bro tarball
 tar -xvzf $DWNLDDIR/bro-2.5.tar.gz --directory $DWNLDDIR/
 
+# make the bro directory
+mkdir /opt/bro
+
 # CMMI bro
 cd $DWNLDDIR/bro-2.5 && \
-    ./configure && \
+    ./configure --prefix=/opt/bro&& \
     make && \
     make install
 
-export PATH=/usr/local/bro/bin:$PATH
+export PATH=/opt/bro/bin:$PATH
 
 rm -rf $DWNLDDIR
 
