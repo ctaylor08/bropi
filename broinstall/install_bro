@@ -27,7 +27,7 @@ mkdir /opt/bro
 
 # CMMI bro
 cd $DWNLDDIR/bro-2.5 && \
-    ./configure --prefix=/opt/bro&& \
+    ./configure --prefix=/opt/bro && \
     make && \
     make install
 
