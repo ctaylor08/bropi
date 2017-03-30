@@ -33,5 +33,11 @@ cd $DWNLDDIR/bro-2.5 && \
 
 export PATH=/opt/bro/bin:$PATH
 
+# chown/chmod logs and spool directories
+chown -R $USER: /usr/local/bro/logs
+chown -R $USER: /usr/local/bro/spool
+chmod u+w -R /usr/local/brologs
+chmod u+w -R /usr/local/bro/spool
+
 rm -rf $DWNLDDIR
 
