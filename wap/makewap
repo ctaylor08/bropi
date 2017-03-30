@@ -1,7 +1,5 @@
 #!/bin/bash
-
-# sudo mode
-sudo -s
+# RUN AS SUDO
 
 # This script's directory
 SCRIPT=$(readlink -f "$0")
@@ -46,5 +44,3 @@ sed -i '/exit 0/i iptables-restore < /etc/iptables.ipv4.nat' /etc/rc.local
 service hostapd start
 service dnsmasq start
 
-# exit sudo mode
-exit

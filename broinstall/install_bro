@@ -1,7 +1,5 @@
 #!/bin/bash
-
-# sudo mode
-sudo -s
+# RUN AS SUDO
 
 # this script's directory
 SCRIPT=$(readlink -f "$0")
@@ -34,5 +32,3 @@ export PATH=/usr/local/bro/bin:$PATH
 
 rm -rf $DWNLDDIR
 
-# exit sudo mode
-exit
