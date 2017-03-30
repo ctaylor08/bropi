@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# sudo mode
+sudo -s
+
+# this script's directory
+SCRIPT=$(readlink -f "$0")
+THISDIR=$(dirname "$SCRIPT")
+DWNLDDIR=$THISDIR/tmp
+
+# update/upgrade
+apt-get update -y
+apt-get upgrade -y
+
+# install dependencies
+apt-get install -y $(cat reqs.txt)
+
+# create tmp directory
+mkdir $DWNLDDIR
+
+# Download binary release into DWNLD_DIR
+curl -o $DWNLDDIR/bro-2.5.tar.gz  https://www.bro.org/downloads/bro-2.5.tar.gz
+
+# Unpack the bro tarball
+tar -xvzf $DWNLDDIR/bro-2.5.tar.gz --directory $DWNLDDIR/
+
+# CMMI bro
+cd $DWNLDDIR/bro-2.5 && \
+    ./configure && \
+    make && \
+    make install
+
+export PATH=/usr/local/bro/bin:$PATH
+
+rm -rf $DWNLDDIR
+
+# exit sudo mode
+exit
