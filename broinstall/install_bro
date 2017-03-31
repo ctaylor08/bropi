@@ -1,5 +1,4 @@
 #!/bin/bash
-# RUN AS SUDO
 
 # this script's directory
 SCRIPT=$(readlink -f "$0")
@@ -7,11 +6,11 @@ THISDIR=$(dirname "$SCRIPT")
 DWNLDDIR=$THISDIR/tmp
 
 # update/upgrade
-apt-get update -y
-apt-get upgrade -y
+sudo apt-get update -y
+sudo apt-get upgrade -y
 
 # install dependencies
-apt-get install -y $(cat reqs.txt)
+sudo apt-get install -y $(cat reqs.txt)
 
 # create tmp directory
 mkdir $DWNLDDIR
@@ -22,22 +21,15 @@ curl -o $DWNLDDIR/bro-2.5.tar.gz  https://www.bro.org/downloads/bro-2.5.tar.gz
 # Unpack the bro tarball
 tar -xvzf $DWNLDDIR/bro-2.5.tar.gz --directory $DWNLDDIR/
 
-# make the bro directory
-mkdir /opt/bro
-
 # CMMI bro
 cd $DWNLDDIR/bro-2.5 && \
-    ./configure --prefix=/opt/bro && \
+    ./configure && \
     make && \
-    make install
+    sudo make install
 
-export PATH=/opt/bro/bin:$PATH
+# remove tmp directory
+sudo rm -rf $DWNLDDIR
 
-# chown/chmod logs and spool directories
-chown -R $USER: /usr/local/bro/logs
-chown -R $USER: /usr/local/bro/spool
-chmod u+w -R /usr/local/brologs
-chmod u+w -R /usr/local/bro/spool
-
-rm -rf $DWNLDDIR
+# add path globally
+sudo su -c 'echo "export PATH=/usr/local/bro/bin:$PATH" >> /etc/bash.bashrc'
 
