@@ -1,0 +1,78 @@
+#!/bin/bash
+
+# bropi install directory
+SCRIPT=$(readlink -f "S0")
+BROPIDIR=$(dirname "$SCRIPT")
+
+# function to print help
+print_help() {
+  echo ""
+  echo "To install everything:"
+  echo "  ./bropi_setup"
+  echo ""
+  echo "To install one at a time:"
+  echo "  ./bropi_setup [option]"
+  echo "i.e."
+  echo "  ./bropi_set bro"
+  echo "  Options include [bro, wap]"
+  echo ""
+  echo "To view this help message:"
+  echo "  ./bropi_setup help"
+}
+
+# function to upgrade apt-get
+apt_up () {
+  echo "upgrading and updating apt-get..."
+  #sudo apt-get upgrade -y
+  #sudo apt-get update -y
+}
+
+# function to run wap install script
+wap_install () {
+  echo "setting up your pi as a wireless access point..."
+  #sudo ./$BROPIDIR/wap/install
+}
+
+# function to run bro install script
+bro_install () {
+  echo "installing bro..."
+  #./$BROPIDIR/bro/install
+}
+
+# options
+opt=$1
+case "$opt" in
+  "help")
+    print_help
+    ;;
+  "bro")
+    apt_up
+    bro_install
+    ;;
+  "wap")
+    apt_up
+    wap_install
+    ;;
+  "")
+    echo "Running this script with no options will install all of the things"
+    read -p "Are you sure you want to continue?[y/n]: " go
+    if [ "$go" = "n" ]
+    then
+      echo "quiting bropi_setup..."
+      exit
+    elif [ "$go" = "y" ]
+    then
+      apt_up
+      wap_install
+      bro_install
+    else
+      echo "invalid option, you should have entered 'y' or 'n'"
+      echo "try again"
+      exit
+    fi
+    ;;
+  *)
+    echo "invalid option..."
+    print_help
+esac
+
