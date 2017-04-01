@@ -23,20 +23,20 @@ print_help() {
 # function to upgrade apt-get
 apt_up () {
   echo "upgrading and updating apt-get..."
-  #sudo apt-get upgrade -y
-  #sudo apt-get update -y
+  sudo apt-get upgrade -y
+  sudo apt-get update -y
 }
 
 # function to run wap install script
 wap_install () {
   echo "setting up your pi as a wireless access point..."
-  #sudo ./$BROPIDIR/wap/install
+  sudo ./$BROPIDIR/wap/install
 }
 
 # function to run bro install script
 bro_install () {
   echo "installing bro..."
-  #./$BROPIDIR/bro/install
+  ./$BROPIDIR/bro/install
 }
 
 # options
