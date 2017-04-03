@@ -30,13 +30,25 @@ apt_up () {
 # function to run wap install script
 wap_install () {
   echo "setting up your pi as a wireless access point..."
-  sudo ./$BROPIDIR/wap/install
+  cd $BROPIDIR/wap
+  sudo ./do_install
+  cd $BROPIDIR
 }
 
 # function to run bro install script
 bro_install () {
   echo "installing bro..."
-  ./$BROPIDIR/bro/install
+  cd $BROPIDIR/bro
+  ./do_install
+  cd $BROPIDIR
+}
+
+# function to run kafka install script
+kafka_install () {
+  echo "installing kafka..."
+  cd $BROPIDIR/kafka
+  sudo ./do_install
+  cd $BROPIDIR
 }
 
 # options
@@ -53,6 +65,10 @@ case "$opt" in
     apt_up
     wap_install
     ;;
+  "kafka")
+    apt_up
+    kafka_install
+    ;;
   "")
     echo "Running this script with no options will install all of the things"
     read -p "Are you sure you want to continue?[y/n]: " go
@@ -65,6 +81,7 @@ case "$opt" in
       apt_up
       wap_install
       bro_install
+      kafka_install
     else
       echo "invalid option, you should have entered 'y' or 'n'"
       echo "try again"
