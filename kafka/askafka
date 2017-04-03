@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# set variables
+SCRIPT=$(readlink -f "$0")
+THISDIR=$(dirname "$SCRIPT")
+KHOME=/home/$(whoami)
+DWNLDDIR=$KHOME/tmp
+KDIR=$KHOME/kafka
+
+# install dependencies
+sudo apt-get install -y  $(cat $THISDIR/reqs.txt)
+
+# make the tmp directory and kafka base directory
+mkdir $DWNLDDIR
+mkdir $KDIR
+
+# Download and extract kafka
+curl -o $DWNLDDIR/kafka.tgz http://apache.mirrors.pair.com/kafka/0.10.2.0/kafka_2.11-0.10.2.0.tgz
+tar -xzf $DWNLDDIR/kafka.tgz -C $KDIR --strip 1
+
+# Update kafka config to allow topic deletion
+echo "delete.topic.enable = true" >> $KDIR/config/server.properties
+
+# remove the tmp directory
+rm -rf $DWNLDDIR
