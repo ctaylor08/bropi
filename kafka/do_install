@@ -1,0 +1,13 @@
+#/bin/bash
+
+# create kafka user and password
+sudo useradd kafka -m
+echo kafka:kafka | sudo chpasswd
+sudo adduser kafka sudo
+
+# run the askafka script as user kafka
+sudo -u kafka /bin/bash -c "./askafka"
+
+# restrict the kafka user
+sudo deluser kafka sudo
+sudo passwd kafka -l
