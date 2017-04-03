@@ -7,7 +7,7 @@ Scripts to configure your Raspberry PI 3 (Raspbian) as a Wireless Access Point (
 At some point, I will also include a custom case design that will allow for additional SSH-enabled PIs (probably zeros) to be attached.
 
 ## Installing the things
-So far, the only thing that I've got are scripts for bro and to setup your pi as a wap. I will be adding as I go.
+So far, the only thing that I've got are scripts for installing bro and kafka, and to setup your pi as a wap. I will be adding as I go.
 
 To install the things, you can use the bropi_setup script as so:
 ```
