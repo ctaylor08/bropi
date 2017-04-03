@@ -17,6 +17,7 @@ To install the things, you can use the bropi_setup script as so:
 # Install specific things:
 ./bropi_setup wap
 ./bropi_setup bro
+./bropi_setup kafka
 
 # Kinda useless help message I threw in there:
 ./bropi_setup help
@@ -24,6 +25,6 @@ To install the things, you can use the bropi_setup script as so:
 
 ## TODO
 - custom bro configs for master/proxy and workers
-- install scripts for apache kafka and spark (and neccessary configs)
+- install scripts for apache spark (and neccessary configs)
 - case design for n? pi zeros added on as probably bro workers
 - lots of other things
