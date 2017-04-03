@@ -1,6 +1,8 @@
 # BROPI
-Scripts to configure your Raspberry PI 3 as a Wireless Access Point (WAP), and install:
-- Bro 2.5
+Scripts to configure your Raspberry PI 3 (Raspbian) as a Wireless Access Point (WAP), and install:
+- Bro 2.5 (Network monitoring)
+- Apache Kafka (Log management +)
+- Apache Spark (Eventual machine learning analytics)
 
 At some point, I will also include a custom case design that will allow for additional SSH-enabled PIs (probably zeros) to be attached.
 
@@ -21,9 +23,7 @@ To install the things, you can use the bropi_setup script as so:
 ```
 
 ## TODO
-- Logstash or some other way to store the logs
-- elasticsearch might be cool
-- kibana
 - custom bro configs for master/proxy and workers
+- install scripts for apache kafka and spark (and neccessary configs)
 - case design for n? pi zeros added on as probably bro workers
 - lots of other things
