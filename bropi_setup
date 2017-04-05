@@ -79,7 +79,7 @@ case "$opt" in
     kafka_install
     ;;
   "spark")
-    #apt_up
+    apt_up
     spark_install
     ;;
   "")
