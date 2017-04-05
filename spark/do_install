@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# create spark user and password
+sudo useradd spark -m
+echo spark:spark | sudo chpasswd
+sudo adduser spark sudo
+
+# run the asspark script as user spark
+sudo -u spark /bin/bash -c "./asspark"
+
+# restrict the spark user
+sudo deluser spark sudo
+sudo passwd spark -l
