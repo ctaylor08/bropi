@@ -5,14 +5,12 @@ THISDIR=$(dirname -f "$SCRIPT")
 SHOME=/home/$(whoami)
 DWNLDDIR=$SHOME/tmp
 SPRKDIR=$SHOME/spark
-SCLADIR=$SHOME//scala
 
 # make the tmp directory
 mkdir $DWNLDDIR
 
 # make the spark and scala directories
 mkdir $SPRKDIR
-mkdir $SCLADIR
 
 # download latest spark tarball to the tmp directory
 curl -o $DWNLDDIR/spark.tgz http://d3kbcqa49mib13.cloudfront.net/spark-2.1.0.tgz
@@ -20,17 +18,8 @@ curl -o $DWNLDDIR/spark.tgz http://d3kbcqa49mib13.cloudfront.net/spark-2.1.0.tgz
 # untar to the spark directory
 tar -xzf $DWNLDDIR/spark.tgz -C $SPRKDIR --strip 1
 
-# download latest scala tarball
-curl -o $DWNLDDIR/scala.tgz http://downloads.lightbend.com/scala/2.12.1/scala-2.12.1.tgz
-
-# untar to the scala directory
-tar -xzf $DWNLDDIR/scala.tgz -C $SCLADIR --strip 1
-
 # remove the tmp directory
 rm -rf $DWNLDDIR
 
-# make a copy of spark-env.sh.template
-cp $SPRKDIR/conf/spark-env.sh.template -d $SPRKDIR/conf/spark-env.sh
-
-#add SCALA_HOME variable to spark-env.sh
-echo "export SCALA_HOME=$SCLADIR" >> $SPRKDIR/conf/spark-env.sh
+# build scala using maven
+$SPRKDIR/build/mvn -DskipTests clean package
